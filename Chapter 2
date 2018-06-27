@@ -1,0 +1,209 @@
+/* 시간 분 초
+public class Main {
+
+    public static void main(String[] args) {
+        int num;
+        do {
+            Scanner sc = new Scanner(System.in);
+            num = sc.nextInt();
+        }while(num<0 || num>=86400);
+        int hour= num/3600;
+        int min= (num-3600*hour)/60;
+        int sec= num%60;
+        System.out.println(hour+" "+min+" "+sec);
+    }
+}*/
+/* 원기둥 부피***********************************************************************
+import java.util.Scanner;
+public class Main{
+
+    public static void main(String [] args){
+        double rad, leng;
+        Scanner sc=new Scanner(System.in);
+        do {
+            rad = sc.nextDouble();
+        }while(rad<1 || rad>1000);
+        do {
+            leng = sc.nextDouble();
+        }while(leng<1 || leng>1000);
+        Getarea Area= new Getarea(rad);
+        Getvolume Volume= new Getvolume(Area.showarea(), leng);
+        System.out.printf("%.1f\n%.1f\n",Math.floor(Area.showarea()*10d)/10d,Math.floor(Volume.showvolume()*10d)/10d);
+    }
+}
+
+class Getarea {
+    final double PI=3.14159;
+    private double area;
+
+    public Getarea(double radius){
+         area=radius*radius*PI;
+    }
+    public double showarea(){
+        return area;
+    }
+}
+
+class Getvolume{
+    private double volume;
+    public Getvolume(double area, double length){
+        volume= area*length;
+    }
+    public double showvolume(){
+        return volume;
+    }
+}*/
+/*
+//미터 피트 인치*****************************************************************
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] args){
+        double M, inch1,feet, inch2;
+        Scanner sc= new Scanner(System.in);
+        do{
+            M=sc.nextDouble();
+        }while(M<0 || M>1000);
+        inch1=M*39.3701;
+        feet=M*3.2808;
+        inch2=inch1-((int)feet)*12;
+        System.out.println((int)feet);
+        System.out.println((int)inch2);
+    }
+}
+*//*
+정수의 합*************************************************************************
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] args){
+        int num, sum=0;
+        Scanner sc= new Scanner(System.in);
+        do{
+            num=sc.nextInt();
+        }while(num<0 || num>1000);
+        while(num != 0){
+            sum+=num%10;
+            num=num/10;
+        }
+        System.out.println(sum);
+    }
+}
+*/
+/* BMI**************************************************************************
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] args){
+        double Wp, Wk, Hi, Hm, BMI,ans;
+        Scanner sc= new Scanner(System.in);
+        do{
+            Wp=sc.nextDouble();
+        }while(Wp<50 || Wp>200);
+        do{
+            Hi=sc.nextDouble();
+        }while(Hi<10 || Hi>100);
+        Convert con=new Convert();
+        Wk=con.PtoK(Wp);
+        Hm=con.ItoM(Hi);
+        BMI=con.getBMI(Wk,Hm);
+        ans=Math.floor(BMI*100)/100;
+        System.out.printf("%.2f",ans);
+    }
+}
+
+class Convert{
+    public double PtoK(double P){
+        return P*0.45359237;
+    }
+    public double ItoM(double I){
+        return I*0.0254;
+    }
+    public double getBMI(double k, double m){
+        return k/(m*m);
+    }
+}*//*
+삼각형 넓이**********************************************************************
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] args){
+        double x,y,area;
+        Scanner sc= new Scanner(System.in);
+        Dot ggok = new Dot();
+        Dot ji = new Dot();
+        Dot jum = new Dot();
+        do {
+            x = sc.nextDouble();
+            y = sc.nextDouble();
+            ggok.setDot(x,y);
+        }while((x<-100||x>100)||(y<-100 || y>100));
+        do {
+            x = sc.nextDouble();
+            y = sc.nextDouble();
+            ji.setDot(x,y);
+        }while((x<-100||x>100)||(y<-100 || y>100));
+        do {
+            x = sc.nextDouble();
+            y = sc.nextDouble();
+            jum.setDot(x,y);
+        }while((x<-100||x>100)||(y<-100 || y>100));
+        Triangle saymo = new Triangle(ggok, ji, jum);
+        area=saymo.getArea();
+        System.out.printf("%.1f",Math.floor(area*10)/10);
+    }
+}
+
+class Dot{
+    double x,y;
+    public void setDot(double a, double b){
+        x=a;
+        y=b;
+    }
+}
+class Triangle{
+    private Dot one;
+    private Dot two;
+    private Dot three;
+    private double s;
+    private double side1, side2, side3;//12,13,23
+    public Triangle(Dot a, Dot b, Dot c) {
+        one = a;
+        two = b;
+        three = c;
+        side1= Math.sqrt((one.x-two.x)*(one.x-two.x)+(one.y-two.y)*(one.y-two.y));
+        side2= Math.sqrt((one.x-three.x)*(one.x-three.x)+(one.y-three.y)*(one.y-three.y));
+        side3= Math.sqrt((three.x-two.x)*(three.x-two.x)+(three.y-two.y)*(three.y-two.y));
+    }
+    public double getArea(){
+        s=(side1+side2+side3)/2;
+        return Math.sqrt(s*(s - side1)*(s - side2)*(s - side3));
+    }
+}*//*월 복리**************************************************************************
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] args){
+        Scanner sc= new Scanner(System.in);
+        double money;
+        int i;
+        do{
+            money=sc.nextDouble();
+        }while(money<1||money>1000);
+        Interest me=new Interest(money);
+        for(i=0;i<6;i++){
+            me.afteronemonth();
+        }
+        money=me.getmoney();
+        System.out.printf("%.1f",Math.floor(money*10)/10);
+    }
+}
+class Interest{
+    private double money;
+    private double monthly;
+    public Interest(double mon){
+        money=0;
+        monthly=mon;
+    }
+    public void afteronemonth(){
+        money=(money+monthly)*1.00417;
+    }
+    public double getmoney(){
+        return money;
+    }
+}*/
